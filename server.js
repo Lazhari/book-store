@@ -5,9 +5,10 @@ const app = express();
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const port = 8000;
 const book = require('./app/routes/book');
 const config = require('config');
+
+const port = config.util.getEnv('PORT') || config.PORT || 3000;
 
 // DB options
 const options = {

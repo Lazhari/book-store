@@ -1,3 +1,4 @@
 {
-    "DBHost": "mongodb://localhost/bookstore-dev"
+    "DBHost": "mongodb://localhost/bookstore-dev",
+    "PORT": 8000
 }
