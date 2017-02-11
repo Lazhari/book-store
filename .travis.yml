@@ -7,6 +7,9 @@ env:
   global:
   - NODE_ENV=test
 after_success: npm run coverage
+cache:
+  directories:
+  - node_modules
 deploy:
   provider: heroku
   app: books-store-tdd
