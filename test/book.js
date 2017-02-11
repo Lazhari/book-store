@@ -163,6 +163,35 @@ describe('Books', () => {
                     });
             });
         });
+
+        it('it should return an error if the book ID is not valid', (done) => {
+            chai.request(server)
+                .put('/book/90')
+                .send({year: 2009})
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('message');
+                    res.body.should.have.property('name');
+                    res.body.should.have.property('kind').eql('ObjectId');
+                    res.body.value.should.have.property('_id').eql('90');
+                    res.body.should.have.property('path').eql('_id');
+                    done();
+                });
+        });
+
+        it('it should return not found if the book ID don\'t exist', (done) => {
+            chai.request(server)
+                .put('/book/589e02e559f531603fe40322')
+                .send({year: 2010})
+                .end((err, res) => {
+                    res.should.have.status(404);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('message').eql('Book not found!');
+                    res.body.should.have.property('id').eql('589e02e559f531603fe40322');
+                    done();
+                });
+        });
     });
 
     /**
@@ -188,6 +217,34 @@ describe('Books', () => {
                         done();
                     });
             });
+        });
+        it('it should return an error if the book ID is not valid', (done) => {
+            chai.request(server)
+                .put('/book/90')
+                .send({year: 2009})
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('message');
+                    res.body.should.have.property('name');
+                    res.body.should.have.property('kind').eql('ObjectId');
+                    res.body.value.should.have.property('_id').eql('90');
+                    res.body.should.have.property('path').eql('_id');
+                    done();
+                });
+        });
+
+        it('it should return not found if the book ID don\'t exist', (done) => {
+            chai.request(server)
+                .put('/book/589e02e559f531603fe40322')
+                .send({year: 2010})
+                .end((err, res) => {
+                    res.should.have.status(404);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('message').eql('Book not found!');
+                    res.body.should.have.property('id').eql('589e02e559f531603fe40322');
+                    done();
+                });
         });
     });
 });
