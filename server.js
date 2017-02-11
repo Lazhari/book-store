@@ -27,7 +27,8 @@ const options = {
 };
 
 // DB connection
-mongoose.connect(config.DBHost, options);
+const mongoURI = config.DBHost || config.util.getEnv('DBHost');
+mongoose.connect(mongoURI, options);
 
 const db = mongoose.connection;
 
