@@ -2,7 +2,7 @@
 /* global describe it beforeEach */
 process.env.NODE_ENV = 'test';
 
-const Book = require('../controllers/models/book');
+const Book = require('../app/models/book');
 
 // Require the dev-dependencies
 const chai = require('chai');

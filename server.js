@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const port = 8000;
-const book = require('./controllers/routes/book');
+const book = require('./app/routes/book');
 const config = require('config');
 
 // DB options
