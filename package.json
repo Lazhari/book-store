@@ -4,7 +4,7 @@
   "description": "Book store API",
   "main": "index.js",
   "scripts": {
-    "start": "export NODE_ENV=dev && node server.js",
+    "start": "export NODE_ENV=dev && nodemon server.js",
     "test": "nyc --reporter=html --reporter=text mocha --timeout 10000",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -22,6 +22,7 @@
     "chai-http": "^3.0.0",
     "coveralls": "^2.11.16",
     "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
     "nyc": "^10.1.2"
   }
 }
