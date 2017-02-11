@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const book = require('./app/routes/book');
 const config = require('config');
 
-const port = config.util.getEnv('PORT') || config.PORT || 3000;
+const port = process.env.PORT || config.PORT || 3000;
 
 // DB options
 const options = {
@@ -27,7 +27,7 @@ const options = {
 };
 
 // DB connection
-const mongoURI = config.DBHost || config.util.getEnv('DBHost');
+const mongoURI = process.env.DBHost || config.DBHost;
 mongoose.connect(mongoURI, options);
 
 const db = mongoose.connection;
