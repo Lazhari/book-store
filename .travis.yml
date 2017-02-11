@@ -1,9 +1,14 @@
 language: node_js
 node_js:
-  - stable
+- stable
 services:
-  - mongodb
+- mongodb
 env:
   global:
-    - NODE_ENV=test
+  - NODE_ENV=test
 after_success: npm run coverage
+deploy:
+  provider: heroku
+  app: books-store
+  api_key:
+    secure: grtjbHKLUclYuyB/4R8EDWovPJ44xwpOqO7etet7pqhyBxevKaGYIZIk+9ZQNuRjlmGIHScGYA3EC59SlBC5DV2Zar3r8SzIGUrRXtTdbcAXJHz/VDmiZGWGOs4AXZKsZfHbU779rc2XhRbp+WWvLdm3CMSGSOb0+82zj/uR8giUdRJXk77eu/3nb5Z63+jeC9FhGDbtTnQm+icmKyc+wXF6gAFbCI0KoddUIV+ivmUUFTmThDbRUd3ht3F2Wnh0SmumBY9iYcPaEvp4qSMnTtPasD+1gQfFsO9MEb/OnizbuMTAl1BkDkzKSmvtIF0AlQdhyirqC78KP3C1Zhqfzg1iLm0W6jYcDjOc7MNBvQ5WcDWLeCKe/GKB0v6MdujB74C03p7tZHGIuelHcBi1JWlpHEo5QZ7ofhg04Ixbg0XLYXSPqpVJFko2zVVvy8IptLaZRicQx35Lm5K5HgdIq8qKLwvKj2tLoRbgm9G0h1PvD/+xT/gk8SY9Xs+gWglrBrxUViFvmL0Uy/hl6BBVB7JpokSdKU+ffJgISMdern+FXYFH59No7ArBdS1f3YNf0dWkOld7u6EY/TaK7n/j8KYe8e55JLKV0cFj6jdEl8jryJuuLjmhsniVYB3K9LGCIVEHPk4NYVpWMNuQlIxjKWr5EGEx/XBHj8HuZYoQeRM=
