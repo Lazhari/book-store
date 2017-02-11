@@ -5,11 +5,26 @@ const Schema = mongoose.Schema;
 // Boook schema definition
 
 const BookSchema = new Schema({
-    title: {type: String, required: true},
-    author: {type: String, required: true},
-    year: {type: Number, required: true},
-    pages: {type: Number, required: true},
-    createdAt: {type: Date, default: Date.now}
+    title: {
+        type: String,
+        required: true
+    },
+    author: {
+        type: String,
+        required: true
+    },
+    year: {
+        type: Number,
+        required: true
+    },
+    pages: {
+        type: Number,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 }, {
     versionKey: false
 });
@@ -18,7 +33,7 @@ const BookSchema = new Schema({
 
 BookSchema.pre('save', next => {
     const now = new Date();
-    if(!this.createdAt) {
+    if (!this.createdAt) {
         this.createdAt = now;
     }
     next();

@@ -1,8 +1,7 @@
 // During the rest the en variable is set to test
-
+/* global describe it beforeEach */
 process.env.NODE_ENV = 'test';
 
-const mongoose = require('mongoose');
 const Book = require('../controllers/models/book');
 
 // Require the dev-dependencies
@@ -48,7 +47,7 @@ describe('Books', () => {
                 title: 'The Lord of the Rings',
                 author: 'J.R.R Tolkien',
                 year: 1954
-            }
+            };
             chai.request(server)
                 .post('/book')
                 .send(book)
@@ -67,7 +66,7 @@ describe('Books', () => {
                 author: 'J.R.R Tolkien',
                 year: 1954,
                 pages: 1170
-            }
+            };
             chai.request(server)
                 .post('/book')
                 .send(book)
@@ -106,14 +105,14 @@ describe('Books', () => {
                         res.body.should.have.property('year');
                         res.body.should.have.property('_id').eql(book.id);
                         done();
-                    })
+                    });
 
             });
         });
 
         it('it should GET an error if the book ID is not valid', (done) => {
             chai.request(server)
-                .get(`/book/90`)
+                .get('/book/90')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -123,26 +122,26 @@ describe('Books', () => {
                     res.body.should.have.property('value').eql('90');
                     res.body.should.have.property('path').eql('_id');
                     done();
-                })
+                });
         });
 
         it('it should GET not found if the book ID don\'t exist', (done) => {
             chai.request(server)
-                .get(`/book/589e02e559f531603fe40322`)
+                .get('/book/589e02e559f531603fe40322')
                 .end((err, res) => {
                     res.should.have.status(404);
                     res.body.should.be.a('object');
                     res.body.should.have.property('message').eql('Book not found!');
                     res.body.should.have.property('id').eql('589e02e559f531603fe40322');
                     done();
-                })
+                });
         });
     });
     /**
      * Test the /PUT/:id route
      */
-    describe ('/PUT/:id book', () => {
-        it ('it should UPDATE a book given the id', (done) => {
+    describe('/PUT/:id book', () => {
+        it('it should UPDATE a book given the id', (done) => {
             const book = new Book({
                 title: 'The Chronicles of Narnia',
                 author: 'C.S. Lewis',
@@ -161,16 +160,16 @@ describe('Books', () => {
                         res.body.should.have.property('message').eql('Book updated!');
                         res.body.book.should.have.property('year').eql(1952);
                         done();
-                    })
-            })
+                    });
+            });
         });
     });
 
     /**
      * Test the /DELETE/:id route
      */
-    describe ('/DELETE/:id Book', () => {
-        it ('it should DELETE a book given the id', (done) => {
+    describe('/DELETE/:id Book', () => {
+        it('it should DELETE a book given the id', (done) => {
             const book = new Book({
                 title: 'The Chronicles of Narnia',
                 author: 'C.S. Lewis',
