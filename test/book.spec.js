@@ -164,10 +164,36 @@ describe('Books', () => {
             });
         });
 
+        it('it should return an error if the book year is invalid', (done) => {
+            const book = new Book({
+                title: 'The Chronicles of Narnia',
+                author: 'C.S. Lewis',
+                year: 1950,
+                pages: 778
+            });
+            book.save((err, book) => {
+                chai.request(server)
+                    .put(`/book/${book.id}`)
+                    .send({
+                        year: '1952a'
+                    })
+                    .end((err, res) => {
+                        res.should.have.status(500);
+                        res.body.should.be.a('object');
+                        res.body.should.have.property('errors');
+                        res.body.errors.should.have.property('year');
+                        res.body.errors.year.should.have.property('kind').eql('Number');
+                        done();
+                    });
+            });
+        });
+
         it('it should return an error if the book ID is not valid', (done) => {
             chai.request(server)
                 .put('/book/90')
-                .send({year: 2009})
+                .send({
+                    year: 2009
+                })
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -183,7 +209,9 @@ describe('Books', () => {
         it('it should return not found if the book ID don\'t exist', (done) => {
             chai.request(server)
                 .put('/book/589e02e559f531603fe40322')
-                .send({year: 2010})
+                .send({
+                    year: 2010
+                })
                 .end((err, res) => {
                     res.should.have.status(404);
                     res.body.should.be.a('object');
