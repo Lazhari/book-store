@@ -64,12 +64,19 @@ function deleteBook(req, res) {
         _id: req.params.id
     }, (err, result) => {
         if (err) {
-            res.status(400).send(err);
+            return res.status(400).send(err);
         }
-        res.json({
-            message: 'Book successfully deleted!',
-            result
-        });
+        if (result.result.n === 0) {
+            return res.status(404).send({
+                message: 'Book not found!',
+                id: req.params.id
+            });
+        } else {
+            return res.json({
+                message: 'Book successfully deleted!',
+                result
+            });
+        }
     });
 }
 
@@ -84,7 +91,7 @@ function updateBook(req, res) {
         if (err) {
             return res.status(400).send(err);
         }
-        if(!book) {
+        if (!book) {
             return res.status(404).send({
                 message: 'Book not found!',
                 id: req.params.id
