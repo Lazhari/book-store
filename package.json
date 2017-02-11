@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "export NODE_ENV=dev && node server.js",
-    "test": "mocha --timeout 10000"
+    "test": "nyc --reporter=html --reporter=text mocha --timeout 10000",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,8 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
-    "mocha": "^3.2.0"
+    "coveralls": "^2.11.16",
+    "mocha": "^3.2.0",
+    "nyc": "^10.1.2"
   }
 }
