@@ -10,4 +10,6 @@
 [![bitHound Dependencies](https://www.bithound.io/github/Lazhari/book-store/badges/dependencies.svg)](https://www.bithound.io/github/Lazhari/book-store/master/dependencies/npm)
 [![bitHound Dev Dependencies](https://www.bithound.io/github/Lazhari/book-store/badges/devDependencies.svg)](https://www.bithound.io/github/Lazhari/book-store/master/dependencies/npm)
 [![bitHound Code](https://www.bithound.io/github/Lazhari/book-store/badges/code.svg)](https://www.bithound.io/github/Lazhari/book-store)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Lazhari/book-store/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Lazhari/book-store/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/Lazhari/book-store/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Lazhari/book-store/build-status/master)
 > Book Store is minimal RESTful API using Express and mongoose to practice the Test-driven development (TDD)
