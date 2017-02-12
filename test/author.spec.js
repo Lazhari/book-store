@@ -41,7 +41,7 @@ describe('Authors', () => {
     /**
      * Test the POST /api/authors
      */
-    describe('POST /api/auhots', () => {
+    describe('POST /api/authors', () => {
         it('it should not POST an author without name field', (done) => {
             const author = {
                 birth_year: 1978,
@@ -49,7 +49,7 @@ describe('Authors', () => {
                 country: 'US'
             };
             chai.request(server)
-                .post('/api/auhors')
+                .post('/api/authors')
                 .send(author)
                 .end((err, res) => {
                     res.should.have.status(201);
