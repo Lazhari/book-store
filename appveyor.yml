@@ -4,8 +4,6 @@ environment:
     - nodejs_version: "5.12"
     - nodejs_version: "6.9"
     - nodejs_version: "7.5"
-  global:
-    - NODE_ENV=test
 services:
   - mongodb
 cache:
