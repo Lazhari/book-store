@@ -56,7 +56,7 @@ describe('Authors', () => {
                     res.body.should.be.a('object');
                     res.body.should.have.property('errors');
                     res.body.errors.should.have.property('name');
-                    res.body.errors.name.should.have.property('name', 'required');
+                    res.body.errors.name.should.have.property('kind').eql('required');
                     done();
                 });
         });
@@ -69,7 +69,7 @@ describe('Authors', () => {
                 country: 'US'
             };
             chai.request(server)
-                .post('/api/auhors')
+                .post('/api/authors')
                 .send(author)
                 .end((err, res) => {
                     res.should.have.status(201);
