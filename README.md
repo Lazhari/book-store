@@ -4,4 +4,5 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Coverage Status](https://coveralls.io/repos/github/Lazhari/book-store/badge.svg?branch=master)](https://coveralls.io/github/Lazhari/book-store?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/github/lazhari/book-store/badge.svg)](https://snyk.io/test/github/lazhari/book-store)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 > Book Store is minimal RESTful API using Express and mongoose to practice the Test-driven development (TDD)
