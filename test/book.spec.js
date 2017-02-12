@@ -29,7 +29,7 @@ describe('Books', () => {
     describe('/GET book', () => {
         it('it should GET all the books', (done) => {
             chai.request(server)
-                .get('/book')
+                .get('/api/books')
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
@@ -49,7 +49,7 @@ describe('Books', () => {
                 year: 1954
             };
             chai.request(server)
-                .post('/book')
+                .post('/api/books')
                 .send(book)
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -68,7 +68,7 @@ describe('Books', () => {
                 pages: 1170
             };
             chai.request(server)
-                .post('/book')
+                .post('/api/books')
                 .send(book)
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -95,7 +95,7 @@ describe('Books', () => {
             });
             book.save((err, book) => {
                 chai.request(server)
-                    .get(`/book/${book.id}`)
+                    .get(`/api/books/${book.id}`)
                     .end((err, res) => {
                         res.should.have.status(200);
                         res.body.should.be.a('object');
@@ -112,7 +112,7 @@ describe('Books', () => {
 
         it('it should GET an error if the book ID is not valid', (done) => {
             chai.request(server)
-                .get('/book/90')
+                .get('/api/books/90')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -127,7 +127,7 @@ describe('Books', () => {
 
         it('it should GET not found if the book ID don\'t exist', (done) => {
             chai.request(server)
-                .get('/book/589e02e559f531603fe40322')
+                .get('/api/books/589e02e559f531603fe40322')
                 .end((err, res) => {
                     res.should.have.status(404);
                     res.body.should.be.a('object');
@@ -150,7 +150,7 @@ describe('Books', () => {
             });
             book.save((err, book) => {
                 chai.request(server)
-                    .put(`/book/${book.id}`)
+                    .put(`/api/books/${book.id}`)
                     .send({
                         year: 1952
                     })
@@ -173,7 +173,7 @@ describe('Books', () => {
             });
             book.save((err, book) => {
                 chai.request(server)
-                    .put(`/book/${book.id}`)
+                    .put(`/api/books/${book.id}`)
                     .send({
                         year: '1952a'
                     })
@@ -190,7 +190,7 @@ describe('Books', () => {
 
         it('it should return an error if the book ID is not valid', (done) => {
             chai.request(server)
-                .put('/book/90')
+                .put('/api/books/90')
                 .send({
                     year: 2009
                 })
@@ -208,7 +208,7 @@ describe('Books', () => {
 
         it('it should return not found if the book ID don\'t exist', (done) => {
             chai.request(server)
-                .put('/book/589e02e559f531603fe40322')
+                .put('/api/books/589e02e559f531603fe40322')
                 .send({
                     year: 2010
                 })
@@ -235,7 +235,7 @@ describe('Books', () => {
             });
             book.save((err, book) => {
                 chai.request(server)
-                    .delete(`/book/${book.id}`)
+                    .delete(`/api/books/${book.id}`)
                     .end((err, res) => {
                         res.should.have.status(200);
                         res.body.should.be.a('object');
@@ -248,7 +248,7 @@ describe('Books', () => {
         });
         it('it should return an error if the book ID is not valid', (done) => {
             chai.request(server)
-                .delete('/book/90')
+                .delete('/api/books/90')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -263,7 +263,7 @@ describe('Books', () => {
 
         it('it should return not found if the book ID don\'t exist', (done) => {
             chai.request(server)
-                .delete('/book/589e02e559f531603fe40322')
+                .delete('/api/books/589e02e559f531603fe40322')
                 .end((err, res) => {
                     res.should.have.status(404);
                     res.body.should.be.a('object');
