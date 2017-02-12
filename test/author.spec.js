@@ -90,7 +90,7 @@ describe('Authors', () => {
      * Test The GET /api/authors/:id route
      */
     describe('GET /api/authors/:id', () => {
-        it('It Should GET a author by the given id', (done) => {
+        it('It Should GET a author by given its id', (done) => {
             const author = new Author({
                 name: 'Author name',
                 birth_year: 1978,
@@ -102,7 +102,7 @@ describe('Authors', () => {
                     .get(`/api/authors/${author.id}`)
                     .end((err, res) => {
                         res.should.have.status(200);
-                        res.body.should.be('object');
+                        res.body.should.be.a('object');
                         res.body.should.have.property('name');
                         res.body.should.have.property('birth_year');
                         res.body.should.have.property('bio');
@@ -122,7 +122,7 @@ describe('Authors', () => {
                     res.body.should.have.property('message');
                     res.body.should.have.property('name');
                     res.body.should.have.property('kind', 'ObjectId');
-                    res.body.should.have.property('value', 90);
+                    res.body.should.have.property('value', '90');
                     res.body.should.have.property('path', '_id');
                     done();
                 });
@@ -146,7 +146,7 @@ describe('Authors', () => {
      * Test the PUT /api/authors/:id Route
      */
     describe('PUT /api/authors/:id', () => {
-        it('it should UPDATE an author by given the id', (done) => {
+        it('it should UPDATE an author given its id', (done) => {
             const author = new Author({
                 name: 'Author name',
                 birth_year: 1988,
@@ -231,7 +231,7 @@ describe('Authors', () => {
      * Test the DELETE /api/authors/:id
      */
     describe('DELETE /api/authors/:id', () => {
-        it('it should DELETE the author by given the id', (done) => {
+        it('it should DELETE the author given its id', (done) => {
             const author = new Author({
                 name: 'Author name',
                 birth_year: 1988,
@@ -240,7 +240,7 @@ describe('Authors', () => {
             });
             author.save((err, author) => {
                 chai.request(server)
-                    .delete(`/api/auhors/${author.id}`)
+                    .delete(`/api/authors/${author.id}`)
                     .end((err, res) => {
                         res.should.have.status(200);
                         res.body.should.be.a('object');
