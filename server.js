@@ -5,7 +5,7 @@ const app = express();
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const book = require('./app/routes/book');
+const routes = require('./app/routes');
 const config = require('config');
 
 const port = process.env.PORT || config.PORT || 3000;
@@ -50,17 +50,7 @@ app.use(bodyParser.json({
     type: 'application/json'
 }));
 
-app.get('/', (req, res) => res.json({
-    message: 'Welcome to our Bookstore!'
-}));
-
-app.route('/book')
-    .get(book.getBooks)
-    .post(book.postBook);
-app.route('/book/:id')
-    .get(book.getBook)
-    .delete(book.deleteBook)
-    .put(book.updateBook);
+routes(app);
 
 app.listen(port);
 console.log('Listening on port ' + port);
