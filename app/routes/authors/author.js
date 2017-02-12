@@ -8,14 +8,12 @@ const Author = require('../../models/author');
 
 function getAuthors(req, res) {
     // Query the DB and if no errors, send all authors
-    const query = Author.find({});
-    query
-        .then((authors) => {
-            return res.json(authors);
-        })
-        .catch((err) => {
-            return res.status(500).send(err);
-        });
+    let query = Author.find({});
+    query.exec((err, authors) => {
+        if (err) res.send(err);
+        //If no errors, send them back to the clients
+        res.json(authors);
+    });
 }
 
 /**
@@ -45,7 +43,7 @@ function postAuthor(req, res) {
 function getAuthor(req, res) {
     Author.findById(req.params.id)
         .then((author) => {
-            if(author) {
+            if (author) {
                 return res.json(author);
             } else {
                 res.status(404).send({
@@ -63,11 +61,12 @@ function getAuthor(req, res) {
  * Delete /api/authors/:id to delete an author given its ID
  */
 function deleteAuthor(req, res) {
-    Author.remove({
+    const query = {
         _id: req.params.id
-    })
+    };
+    Author.remove(query)
         .then((result) => {
-            if(result.result.n === 0) {
+            if (result.result.n === 0) {
                 return res.status(404).send({
                     message: 'Author not found!',
                     id: req.params.id
@@ -91,7 +90,7 @@ function deleteAuthor(req, res) {
 function updateAuthor(req, res) {
     Author.findById(req.params.id)
         .then((author) => {
-            if(!author) {
+            if (!author) {
                 return res.status(404).send({
                     message: 'Author not found!',
                     id: req.params.id
