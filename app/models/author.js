@@ -11,7 +11,7 @@ const AuthorSchema = new Schema({
         required: true
     },
     birth_year: {
-        type: String,
+        type: Number,
         required: true,
     },
     bio: {
