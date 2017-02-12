@@ -205,7 +205,7 @@ describe('Authors', () => {
                     res.body.should.have.property('message');
                     res.body.should.have.property('name');
                     res.body.should.have.property('kind').eql('ObjectId');
-                    res.body.value.should.have.property('_id').eql('90');
+                    res.body.should.have.property('value').eql('90');
                     res.body.should.have.property('path').eql('_id');
                     done();
                 });
