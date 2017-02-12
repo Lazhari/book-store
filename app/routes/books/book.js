@@ -1,6 +1,6 @@
 'use strict';
 
-const Book = require('../models/book');
+const Book = require('../../models/book');
 
 /**
  * GET /book route to retrieve all the books
