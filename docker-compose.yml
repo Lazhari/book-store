@@ -1,16 +1,16 @@
-db:
-  image: mongo
-  ports:
-    - "27017:27017"
-  command: "--smallfiles --logpath=/dev/null"
-web:
-  build: .
-  command: npm start
-  volumes:
-    - .:/books-store
-  ports:
-    - "8000:8000"
-  links:
-    - db
-  environment:
-    PORT: 8000 # this is optional, allows express to use process.env.PORT instead of a raw 3000
+version: "3"
+services:
+    api:
+        build: .
+        ports:
+            - "8080:8080"
+        depends_on:
+            - mongo
+    mongo:
+        image: mongo
+        ports:
+            - "37017:27017"
+        volumes:
+            - bookstore-volume:/data/db
+volumes:
+    bookstore-volume: {}
