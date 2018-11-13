@@ -31,7 +31,7 @@ function postBook(req, res) {
             // If no erros, send it back to the clients
             res.send({
                 message: 'Book successfully added!',
-                book
+                book,
             });
         }
     });
@@ -50,7 +50,7 @@ function getBook(req, res) {
         } else {
             return res.status(404).send({
                 message: 'Book not found!',
-                id: req.params.id
+                id: req.params.id,
             });
         }
     });
@@ -60,24 +60,27 @@ function getBook(req, res) {
  * DELETE /book/:id to delete a book given its id.
  */
 function deleteBook(req, res) {
-    Book.remove({
-        _id: req.params.id
-    }, (err, result) => {
-        if (err) {
-            return res.status(400).send(err);
+    Book.remove(
+        {
+            _id: req.params.id,
+        },
+        (err, result) => {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            if (result.result.n === 0) {
+                return res.status(404).send({
+                    message: 'Book not found!',
+                    id: req.params.id,
+                });
+            } else {
+                return res.json({
+                    message: 'Book successfully deleted!',
+                    result,
+                });
+            }
         }
-        if (result.result.n === 0) {
-            return res.status(404).send({
-                message: 'Book not found!',
-                id: req.params.id
-            });
-        } else {
-            return res.json({
-                message: 'Book successfully deleted!',
-                result
-            });
-        }
-    });
+    );
 }
 
 /**
@@ -85,37 +88,40 @@ function deleteBook(req, res) {
  */
 
 function updateBook(req, res) {
-    Book.findById({
-        _id: req.params.id
-    }, (err, book) => {
-        if (err) {
-            return res.status(400).send(err);
-        }
-        if (!book) {
-            return res.status(404).send({
-                message: 'Book not found!',
-                id: req.params.id
-            });
-        } else {
-            Object.assign(book, req.body).save((err, book) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                return res.json({
-                    message: 'Book updated!',
-                    book
+    Book.findById(
+        {
+            _id: req.params.id,
+        },
+        (err, book) => {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            if (!book) {
+                return res.status(404).send({
+                    message: 'Book not found!',
+                    id: req.params.id,
                 });
-            });
+            } else {
+                Object.assign(book, req.body).save((err, book) => {
+                    if (err) {
+                        return res.status(500).send(err);
+                    }
+                    return res.json({
+                        message: 'Book updated!',
+                        book,
+                    });
+                });
+            }
         }
-    });
+    );
 }
 
-// Export all the functions 
+// Export all the functions
 
 module.exports = {
     getBooks,
     postBook,
     getBook,
     deleteBook,
-    updateBook
+    updateBook,
 };

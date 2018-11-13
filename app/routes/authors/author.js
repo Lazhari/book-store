@@ -24,14 +24,15 @@ function postAuthor(req, res) {
     // Create a new Author
     const newAuthor = new Author(req.body);
     //Save it into the DB
-    newAuthor.save()
-        .then((author) => {
+    newAuthor
+        .save()
+        .then(author => {
             return res.status(201).send({
                 message: 'Author successfully added!',
-                author
+                author,
             });
         })
-        .catch((err) => {
+        .catch(err => {
             return res.status(400).send(err);
         });
 }
@@ -42,17 +43,17 @@ function postAuthor(req, res) {
 
 function getAuthor(req, res) {
     Author.findById(req.params.id)
-        .then((author) => {
+        .then(author => {
             if (author) {
                 return res.json(author);
             } else {
                 res.status(404).send({
                     message: 'Author not found!',
-                    id: req.params.id
+                    id: req.params.id,
                 });
             }
         })
-        .catch((err) => {
+        .catch(err => {
             return res.status(400).send(err);
         });
 }
@@ -62,23 +63,23 @@ function getAuthor(req, res) {
  */
 function deleteAuthor(req, res) {
     const query = {
-        _id: req.params.id
+        _id: req.params.id,
     };
     Author.remove(query)
-        .then((result) => {
+        .then(result => {
             if (result.result.n === 0) {
                 return res.status(404).send({
                     message: 'Author not found!',
-                    id: req.params.id
+                    id: req.params.id,
                 });
             } else {
                 return res.json({
                     message: 'Author successfully deleted!',
-                    result
+                    result,
                 });
             }
         })
-        .catch((err) => {
+        .catch(err => {
             return res.status(400).send(err);
         });
 }
@@ -89,27 +90,27 @@ function deleteAuthor(req, res) {
 
 function updateAuthor(req, res) {
     Author.findById(req.params.id)
-        .then((author) => {
+        .then(author => {
             if (!author) {
                 return res.status(404).send({
                     message: 'Author not found!',
-                    id: req.params.id
+                    id: req.params.id,
                 });
             } else {
                 Object.assign(author, req.body)
                     .save()
-                    .then((author) => {
+                    .then(author => {
                         return res.json({
                             message: 'Author updated!',
-                            author
+                            author,
                         });
                     })
-                    .catch((err) => {
+                    .catch(err => {
                         return res.status(500).send(err);
                     });
             }
         })
-        .catch((err) => {
+        .catch(err => {
             return res.status(400).send(err);
         });
 }
@@ -119,5 +120,5 @@ module.exports = {
     postAuthor,
     getAuthor,
     deleteAuthor,
-    updateAuthor
+    updateAuthor,
 };
