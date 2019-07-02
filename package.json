@@ -8,8 +8,6 @@
     "dev": "export NODE_ENV=dev && nodemon server.js",
     "test": "nyc --reporter=html --reporter=text --reporter=lcov --reporter=clover mocha --timeout 10000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect",
     "lint": "eslint --fix . && echo 'Lint complete.'"
   },
   "husky": {
@@ -24,7 +22,7 @@
     "config": "^3.1.0",
     "express": "^4.14.1",
     "mongoose": "4.11.9",
-    "morgan": "^1.8.0"
+    "morgan": "^1.9.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -39,8 +37,7 @@
     "nodemon": "^1.11.0",
     "nyc": "^14.1.1",
     "prettier": "1.18.2",
-    "pretty-quick": "1.11.1",
-    "snyk": "1.188.0"
+    "pretty-quick": "1.11.1"
   },
   "snyk": true
 }
