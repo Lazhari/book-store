@@ -1,19 +1,23 @@
 language: node_js
 node_js: '12'
 cache: yarn
+services: mongodb
+
 env:
   global:
     - NODE_ENV=test
-services:
-  - mongodb
+
 addons:
   sonarcloud:
     organization: $SONAR_ORG
     token:
       secure: $SONAR_TOKEN
+
 install:
   - yarn install
+
 script:
   - yarn test
   - bash sonar.sh
-after_success: npm run coverage
+
+after_success: yarn coverage
