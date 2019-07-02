@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  install:
+    image: node:12
+    volumes:
+      - .:/usr/src/service
+    working_dir: /usr/src/service
+    command: npm i

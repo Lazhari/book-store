@@ -1,16 +1,26 @@
-version: "3"
+version: '3.7'
+
 services:
-    api:
-        build: .
-        ports:
-            - "8080:8080"
-        depends_on:
-            - mongo
-    mongo:
-        image: mongo
-        ports:
-            - "37017:27017"
-        volumes:
-            - bookstore-volume:/data/db
+  dev:
+    image: node:12
+    volumes:
+      - .:/usr/src/service
+    working_dir: /usr/src/service
+    command: npm run dev
+    ports:
+      - 8000:8000
+    networks:
+      - bookstore
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - bookstore-volume:/data/db
+    networks:
+      - bookstore
+
+networks:
+  bookstore:
 volumes:
-    bookstore-volume: {}
+  bookstore-volume:
