@@ -11,8 +11,8 @@ test:
   services:
     - mongo:latest
   cache:
-  paths:
-    - node_modules/
+    paths:
+      - node_modules/
   script:
     - npm i
     - npm test
