@@ -1,4 +1,4 @@
 {
-    "DBHost": "mongodb://mongo/bookstore-dev",
-    "PORT": 8080
+  "DBHost": "mongodb://mongo/bookstore-dev",
+  "PORT": 8080
 }
