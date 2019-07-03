@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Boook schema definition
+// Book schema definition
 
 const BookSchema = new Schema(
   {

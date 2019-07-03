@@ -3,44 +3,35 @@
 const Author = require('../../models/author');
 
 /**
- * GET /api/authors route to retreive all authors
+ * GET /api/authors route to retrieve all authors
  */
 
-function getAuthors(req, res) {
+async function getAuthors(req, res) {
   // Query the DB and if no errors, send all authors
-  let query = Author.find({});
-  query.exec((err, authors) => {
-    if (err) res.send(err);
-    //If no errors, send them back to the clients
-    res.json(authors);
-  });
+  const authors = await Author.find({})
+    .exec()
+    .catch(res.send);
+  return res.send(authors);
 }
 
 /**
  * POST /api/authors to save a new Author
  */
 
-function postAuthor(req, res) {
+async function postAuthor(req, res) {
   // Create a new Author
   const newAuthor = new Author(req.body);
-  //Save it into the DB
-  newAuthor
-    .save()
-    .then(author => {
-      return res.status(201).send({
-        message: 'Author successfully added!',
-        author
-      });
-    })
-    .catch(err => {
-      return res.status(400).send(err);
-    });
+  const author = await newAuthor.save().catch(err => res.status(400).send(err));
+
+  return res.status(201).send({
+    message: 'Author successfully added!',
+    author
+  });
 }
 
 /**
  * GET /api/authors/:id to retrieve an author given its ID
  */
-
 function getAuthor(req, res) {
   Author.findById(req.params.id)
     .then(author => {
@@ -87,7 +78,6 @@ function deleteAuthor(req, res) {
 /**
  * PUT /api/authors/:id to update an author given its ID
  */
-
 function updateAuthor(req, res) {
   Author.findById(req.params.id)
     .then(author => {
