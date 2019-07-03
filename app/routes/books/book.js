@@ -6,14 +6,13 @@ const Book = require('../../models/book');
  * GET /book route to retrieve all the books
  */
 
-function getBooks(req, res) {
+async function getBooks(req, res) {
   // Query the DB and if no errors, send all the books
-  let query = Book.find({});
-  query.exec((err, books) => {
-    if (err) res.send(err);
-    //If no errors, send them back to the clients
-    res.json(books);
-  });
+  let books = await Book.find({})
+    .exec()
+    .catch(res.send);
+
+  res.json(books);
 }
 
 /**
@@ -59,28 +58,23 @@ function getBook(req, res) {
 /**
  * DELETE /book/:id to delete a book given its id.
  */
-function deleteBook(req, res) {
-  Book.remove(
-    {
-      _id: req.params.id
-    },
-    (err, result) => {
-      if (err) {
-        return res.status(400).send(err);
-      }
-      if (result.result.n === 0) {
-        return res.status(404).send({
-          message: 'Book not found!',
-          id: req.params.id
-        });
-      } else {
-        return res.json({
-          message: 'Book successfully deleted!',
-          result
-        });
-      }
-    }
-  );
+async function deleteBook(req, res) {
+  const result = await Book.remove({
+    _id: req.params.id
+  }).catch(err => {
+    return res.status(400).send(err);
+  });
+  if (result.deletedCount === 0) {
+    return res.status(404).send({
+      message: 'Book not found!',
+      id: req.params.id
+    });
+  } else {
+    return res.json({
+      message: 'Book successfully deleted!',
+      result
+    });
+  }
 }
 
 /**

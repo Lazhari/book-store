@@ -9,18 +9,10 @@ const config = require('config');
 const port = process.env.PORT || config.PORT || 3000;
 
 const options = {
-  server: {
-    socketOptions: {
-      keepAlive: 1,
-      connectTimeoutMS: 3000
-    }
-  },
-  replset: {
-    socketOptions: {
-      keepAlive: 1,
-      connectTimeoutMS: 3000
-    }
-  }
+  useNewUrlParser: true,
+  socketTimeoutMS: 0,
+  keepAlive: true,
+  reconnectTries: 10
 };
 
 // DB connection

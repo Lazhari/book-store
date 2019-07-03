@@ -10,7 +10,7 @@ async function getAuthors(req, res) {
   // Query the DB and if no errors, send all authors
   const authors = await Author.find({})
     .exec()
-    .catch(res.send);
+    .catch(err => res.status(400).send({ message: err.message }));
   return res.send(authors);
 }
 
@@ -52,27 +52,24 @@ function getAuthor(req, res) {
 /**
  * Delete /api/authors/:id to delete an author given its ID
  */
-function deleteAuthor(req, res) {
+async function deleteAuthor(req, res) {
   const query = {
     _id: req.params.id
   };
-  Author.remove(query)
-    .then(result => {
-      if (result.result.n === 0) {
-        return res.status(404).send({
-          message: 'Author not found!',
-          id: req.params.id
-        });
-      } else {
-        return res.json({
-          message: 'Author successfully deleted!',
-          result
-        });
-      }
-    })
-    .catch(err => {
-      return res.status(400).send(err);
+  const result = await Author.remove(query).catch(err => {
+    return res.status(400).send(err);
+  });
+  if (result.deletedCount === 0) {
+    return res.status(404).send({
+      message: 'Author not found!',
+      id: req.params.id
     });
+  } else {
+    return res.json({
+      message: 'Author successfully deleted!',
+      result
+    });
+  }
 }
 
 /**
