@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "export NODE_ENV=dev && nodemon server.js",
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov --reporter=clover mocha --timeout 10000",
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov --reporter=clover mocha --timeout 10000 --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint --fix . && echo 'Lint complete.'",
     "snyk-protect": "snyk protect",
@@ -21,26 +21,26 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.16.0",
-    "config": "^3.1.0",
+    "config": "^3.2.4",
     "express": "^4.14.1",
-    "mongoose": "5.6.2",
+    "mongoose": "5.7.13",
     "morgan": "^1.9.1",
     "snyk": "^1.193.1"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-http": "^3.0.0",
-    "coveralls": "^2.11.16",
-    "eslint": "6.0.1",
-    "eslint-config-prettier": "6.0.0",
-    "eslint-plugin-jest": "22.7.1",
-    "eslint-plugin-prettier": "3.1.0",
-    "husky": "3.0.0",
-    "mocha": "^3.2.0",
-    "nodemon": "^1.11.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "coveralls": "^3.0.9",
+    "eslint": "6.7.2",
+    "eslint-config-prettier": "6.7.0",
+    "eslint-plugin-jest": "23.1.1",
+    "eslint-plugin-prettier": "3.1.1",
+    "husky": "3.1.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.1",
     "nyc": "^14.1.1",
-    "prettier": "1.18.2",
-    "pretty-quick": "1.11.1"
+    "prettier": "1.19.1",
+    "pretty-quick": "2.0.1"
   },
   "snyk": true
 }
