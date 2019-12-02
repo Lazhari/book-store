@@ -12,8 +12,7 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   socketTimeoutMS: 0,
-  keepAlive: true,
-  reconnectTries: 10
+  keepAlive: true
 };
 
 // DB connection
