@@ -15,7 +15,7 @@ chai.use(chaiHttp);
 
 describe('Authors', () => {
   beforeEach(done => {
-    Author.remove({}, err => {
+    Author.deleteMany({}, err => {
       if (err) {
         console.warn(err);
       }
@@ -194,7 +194,7 @@ describe('Authors', () => {
             birth_year: '1952a'
           })
           .end((err, res) => {
-            res.should.have.status(500);
+            res.should.have.status(400);
             res.body.should.be.a('object');
             res.body.should.have.property('errors');
             res.body.errors.should.have.property('birth_year');

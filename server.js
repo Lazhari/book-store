@@ -10,6 +10,7 @@ const port = process.env.PORT || config.PORT || 3000;
 
 const options = {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
   socketTimeoutMS: 0,
   keepAlive: true,
   reconnectTries: 10

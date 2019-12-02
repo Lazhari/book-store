@@ -59,21 +59,23 @@ function getBook(req, res) {
  * DELETE /book/:id to delete a book given its id.
  */
 async function deleteBook(req, res) {
-  const result = await Book.remove({
-    _id: req.params.id
-  }).catch(err => {
+  try {
+    const result = await Book.deleteOne({
+      _id: req.params.id
+    });
+    if (result.deletedCount === 0) {
+      return res.status(404).send({
+        message: 'Book not found!',
+        id: req.params.id
+      });
+    } else {
+      return res.json({
+        message: 'Book successfully deleted!',
+        result
+      });
+    }
+  } catch (err) {
     return res.status(400).send(err);
-  });
-  if (result.deletedCount === 0) {
-    return res.status(404).send({
-      message: 'Book not found!',
-      id: req.params.id
-    });
-  } else {
-    return res.json({
-      message: 'Book successfully deleted!',
-      result
-    });
   }
 }
 
@@ -81,33 +83,26 @@ async function deleteBook(req, res) {
  * PUT /book/:id to update a book given its id
  */
 
-function updateBook(req, res) {
-  Book.findById(
-    {
+async function updateBook(req, res) {
+  try {
+    let book = await Book.findById({
       _id: req.params.id
-    },
-    (err, book) => {
-      if (err) {
-        return res.status(400).send(err);
-      }
-      if (!book) {
-        return res.status(404).send({
-          message: 'Book not found!',
-          id: req.params.id
-        });
-      } else {
-        Object.assign(book, req.body).save((err, book) => {
-          if (err) {
-            return res.status(500).send(err);
-          }
-          return res.json({
-            message: 'Book updated!',
-            book
-          });
-        });
-      }
+    });
+    if (!book) {
+      return res.status(404).send({
+        message: 'Book not found!',
+        id: req.params.id
+      });
+    } else {
+      book = await Object.assign(book, req.body).save();
+      return res.json({
+        message: 'Book updated!',
+        book
+      });
     }
-  );
+  } catch (err) {
+    return res.status(400).send(err);
+  }
 }
 
 // Export all the functions
