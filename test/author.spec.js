@@ -1,11 +1,11 @@
 process.env.NODE_ENV = 'test';
 
-const Author = require('../app/models/author');
+const Author = require('../src/models/author');
 
 // Require the dev-dependencies
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../server');
+const server = require('../src/server');
 
 chai.should();
 

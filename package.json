@@ -2,10 +2,10 @@
   "name": "book-store",
   "version": "0.1.2",
   "description": "Book store API",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "export NODE_ENV=dev && nodemon server.js",
+    "start": "node src/server.js",
+    "dev": "export NODE_ENV=dev && nodemon src/server.js",
     "test": "nyc --reporter=html --reporter=text --reporter=lcov --reporter=clover mocha --timeout 10000 --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint --fix . && echo 'Lint complete.'",

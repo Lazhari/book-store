@@ -1,9 +1,9 @@
-const Book = require('../app/models/book');
+const Book = require('../src/models/book');
 
 // Require the dev-dependencies
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../server');
+const server = require('../src/server');
 
 chai.should();
 

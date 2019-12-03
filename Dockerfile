@@ -33,4 +33,4 @@ COPY . .
 
 ENTRYPOINT ["tini", "--"]
 
-CMD ["node" ,"server.js"]
+CMD ["node" ,"src/server.js"]
