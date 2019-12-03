@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const routes = require('./app/routes');
 const config = require('config');
+const http = require('http');
+const { createTerminus } = require('@godaddy/terminus');
 
 const port = process.env.PORT || config.PORT || 3000;
 
@@ -44,7 +46,29 @@ app.use(
 
 routes(app);
 
-app.listen(port);
-console.log('Listening on port ' + port);
+const server = http.createServer(app);
+
+function onSignal() {
+  console.log('server is starting cleanup');
+  // start cleanup of resource, like databases or file descriptors
+}
+
+async function onHealthCheck() {
+  // checks if the system is healthy, like the db connection is live
+  // resolves, if health, rejects if not
+}
+
+createTerminus(server, {
+  signal: 'SIGINT',
+  healthChecks: { '/healthcheck': onHealthCheck },
+  onSignal
+});
+
+server.listen(port, err => {
+  if (err) {
+    console.error('Something went wrong', err);
+  }
+  console.log(`The magic happen on http://localohst:${port}`);
+});
 
 module.exports = app;
