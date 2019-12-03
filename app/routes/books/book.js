@@ -12,38 +12,33 @@ async function getBooks(req, res) {
     .exec()
     .catch(res.send);
 
-  res.json(books);
+  return res.json(books);
 }
 
 /**
  * POST /book to save a new book
  */
 
-function postBook(req, res) {
-  // Create a new book
-  const newBook = new Book(req.body);
-  // Save it into the DB
-  newBook.save((err, book) => {
-    if (err) {
-      res.send(err);
-    } else {
-      // If no erros, send it back to the clients
-      res.send({
-        message: 'Book successfully added!',
-        book
-      });
-    }
-  });
+async function postBook(req, res) {
+  try {
+    // Create a new book
+    const newBook = new Book(req.body);
+    const book = await newBook.save();
+    res.send({
+      message: 'Book successfully added!',
+      book
+    });
+  } catch (err) {
+    return res.send(err);
+  }
 }
 
 /**
  * GET /book/:id route to retrieve a book given its id.
  */
-function getBook(req, res) {
-  Book.findById(req.params.id, (err, book) => {
-    if (err) {
-      return res.status(400).send(err);
-    }
+async function getBook(req, res) {
+  try {
+    const book = await Book.findById(req.params.id);
     if (book) {
       return res.send(book);
     } else {
@@ -52,7 +47,9 @@ function getBook(req, res) {
         id: req.params.id
       });
     }
-  });
+  } catch (err) {
+    return res.status(400).send(err);
+  }
 }
 
 /**
