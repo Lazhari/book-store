@@ -1,0 +1,30 @@
+version: '1.0'
+stages:
+  - prepare
+  - test
+  - build
+steps:
+  main_clone:
+    title: Cloning main repository...
+    stage: prepare
+    type: git-clone
+    repo: 'lazhari/book-store'
+    revision: master
+    git: github
+  MyUnitTests:
+    title: Unit test
+    stage: test
+    image: node:12.13
+    commands:
+      - yarn install
+      - yarn test
+    environment:
+      - CI=true
+  MyAppDockerImage:
+    title: Building Docker Image
+    type: build
+    stage: build
+    image_name: book-store
+    working_directory: ./
+    tag: 'book-store'
+    dockerfile: Dockerfile
