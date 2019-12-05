@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const helmet = require('helmet');
+const compression = require('compression');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -33,6 +34,9 @@ if (config.util.getEnv('NODE_ENV') !== 'test') {
 // Security Config
 app.use(helmet());
 app.disable('x-powered-by');
+
+// Use compression
+app.use(compression());
 
 // Parse application/json and look for raw text
 app.use(bodyParser.json());
