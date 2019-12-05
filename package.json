@@ -24,6 +24,7 @@
     "body-parser": "^1.16.0",
     "config": "^3.2.4",
     "express": "^4.14.1",
+    "helmet": "3.21.2",
     "mongoose": "5.7.13",
     "morgan": "^1.9.1",
     "snyk": "^1.193.1"

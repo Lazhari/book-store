@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -29,6 +30,9 @@ if (config.util.getEnv('NODE_ENV') !== 'test') {
   // use morgan to log at command line
   app.use(morgan('combined'));
 }
+// Security Config
+app.use(helmet());
+app.disable('x-powered-by');
 
 // Parse application/json and look for raw text
 app.use(bodyParser.json());
