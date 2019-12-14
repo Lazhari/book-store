@@ -28,7 +28,7 @@
     "helmet": "3.21.2",
     "mongoose": "5.7.13",
     "morgan": "^1.9.1",
-    "snyk": "^1.193.1"
+    "snyk": "^1.260.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
