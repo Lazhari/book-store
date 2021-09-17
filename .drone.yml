@@ -1,9 +1,21 @@
+---
 kind: pipeline
 name: default
 
+services:
+  - name: mongodb
+    image: mongo
+
 steps:
-  - name: test
+  - name: install
     image: node:16
     commands:
       - npm install
+  - name: lint
+    image: node:16
+    commands:
+      - npm run lint
+  - name: test
+    image: node:16
+    commands:
       - npm test
