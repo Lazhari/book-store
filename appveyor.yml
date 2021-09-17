@@ -6,7 +6,7 @@ cache:
   - node_modules
 install:
   - npm install
-build: off
 test_script:
   - npm run test
+build: off
 version: '{build}'
