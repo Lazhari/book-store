@@ -15,7 +15,14 @@ steps:
     image: node:16
     commands:
       - npm run lint
+    depends_on:
+      - install
   - name: test
     image: node:16
+    environment:
+      DB_HOST: mongodb
     commands:
       - npm test
+    depends_on:
+      - install
+      - lint
