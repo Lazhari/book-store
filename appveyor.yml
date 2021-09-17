@@ -1,5 +1,5 @@
 environment:
-  nodejs_version: '16.8.0'
+  nodejs_version: "16.8.0"
 services:
   - mongodb
 cache:
@@ -9,4 +9,4 @@ install:
 test_script:
   - npm run test
 build: off
-version: '{build}'
+version: "{build}"
