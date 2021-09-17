@@ -20,7 +20,7 @@ steps:
   - name: test
     image: node:16
     environment:
-      DB_HOST: mongodb
+      DB_HOST: mongodb://mongodb/bookstore-dev
     commands:
       - npm test
     depends_on:
