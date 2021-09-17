@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Book schema definition
-
 const BookSchema = new Schema(
   {
     title: {

@@ -20,7 +20,7 @@ const options = {
 };
 
 // DB connection
-const mongoURI = process.env.DBHost || config.DBHost;
+const mongoURI = process.env.DB_HOST || config.DBHost;
 mongoose.connect(mongoURI, options);
 
 const db = mongoose.connection;
