@@ -23,7 +23,7 @@
     "@godaddy/terminus": "4.3.1",
     "body-parser": "^1.16.0",
     "compression": "1.7.4",
-    "config": "^3.2.4",
+    "config": "^3.3.9",
     "express": "^4.14.1",
     "helmet": "3.21.2",
     "mongoose": "5.13.9",
